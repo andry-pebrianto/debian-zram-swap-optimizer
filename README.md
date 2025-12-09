@@ -1,8 +1,52 @@
-### Automated script to configure ZRAM, swapfile, and sysctl tuning for Debian-based servers. Optimizes memory usage and server performance.
+# debian-zram-swap-optimizer
 
-#### How to Use This Project
+### Featuring
 
-1. Clone this repository.
-2. Adjust the values in the `.env` file according to your preferences.
-3. Make the setup script executable: `sudo chmod +x setup-zram-swap.sh`
-4. Run the setup script: `sudo ./setup-zram-swap.sh`
+- ZRAM (compressed RAM) for improved memory performance
+- Swapfile creation with configurable size and priority
+- Sysctl tuning for swappiness and cache pressure
+
+### How to use
+
+- Clone this repository.
+- Adjust the values in the `.env` file according to your preferences.
+- Make the setup script executable: `sudo chmod +x setup-zram-swap.sh`
+- Run the setup script: `sudo ./setup-zram-swap.sh`
+
+### Verify everything is running and permanent
+
+- Check ZRAM status
+
+```bash
+zramctl
+```
+
+- Check Swap status
+
+```bash
+swapon --show
+```
+
+- Check Sysctl settings
+
+```bash
+sysctl vm.swappiness vm.vfs_cache_pressure
+```
+
+- Verify ZRAM service is enabled (permanent)
+
+```bash
+systemctl status zramswap
+```
+
+- Verify Swapfile entry in /etc/fstab (permanent)
+
+```bash
+grep swapfile /etc/fstab
+```
+
+- Verify Sysctl configuration file exists (permanent)
+
+```bash
+cat /etc/sysctl.d/99-zram-tweaks.conf
+```
